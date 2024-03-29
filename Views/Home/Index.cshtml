@@ -8,5 +8,20 @@
     <form method="post" action="/Home/RunPowerShellScript">
         <button type="submit">Run PowerShell Script</button>
     </form>
+
+    <h2>PowerShell Output:</h2>
+    @if (ViewBag.Output != null && ViewBag.Output is List<string>)
+    {
+        <textarea rows="10" cols="50">
+            @foreach (var line in ViewBag.Output)
+            {
+                @line
+            }
+        </textarea>
+    }
+    else 
+    {
+        <p>No output available.</p>
+    }
 </body>
 </html>

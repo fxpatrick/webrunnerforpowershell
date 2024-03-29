@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "z35TYpk9tWYCNHn8V8VmyPZk9sNk6ZG2liZK0EPnJXmY4jw1+QsQ4zSgEjUXCRv3hgTSID1F2vw+bd1SFdbQ6g==",
+  "dgSpecHash": "RaoAF4MfR0LymlC3dGiZl2DMwzc3VWAaNBYuB1tuHtN1kLZQiylyXHAwZ+10sOgsDcOJCZBeDQBTb9sBpM0kEA==",
   "success": true,
-  "projectFilePath": "G:\\02 Code\\dotnet\\MyWebApplication\\MyWebApplication.csproj",
+  "projectFilePath": "C:\\Users\\CWP2020\\webrunnerforpowershell\\MyWebApplication.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\CWP2020\\.nuget\\packages\\jetbrains.annotations\\2021.2.0\\jetbrains.annotations.2021.2.0.nupkg.sha512",
     "C:\\Users\\CWP2020\\.nuget\\packages\\json.more.net\\1.9.3\\json.more.net.1.9.3.nupkg.sha512",

@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using System;
+using System.Collections.Generic;
 using System.Management.Automation;
 
 namespace MyWebApplication.Controllers
@@ -14,11 +14,13 @@ namespace MyWebApplication.Controllers
         [HttpPost]
         public IActionResult RunPowerShellScript()
         {
-            string scriptPath = "C:\\Users\\CWP2020\\HelloWorld\\test.ps1";
+            string scriptPath = "C:\\Users\\CWP2020\\Documents\\test.ps1";
+
+            List<string> output = new List<string>();
 
             using (PowerShell powerShell = PowerShell.Create())
             {
-				powerShell.AddScript($"Set-ExecutionPolicy Bypass -Scope Process");
+                powerShell.AddScript($"Set-ExecutionPolicy Bypass -Scope Process");
                 powerShell.AddScript(scriptPath);
                 var results = powerShell.Invoke();
 
@@ -26,19 +28,21 @@ namespace MyWebApplication.Controllers
                 {
                     foreach (var error in powerShell.Streams.Error)
                     {
-                        Console.WriteLine("Error: " + error.ToString());
+                        output.Add("Error: " + error.ToString());
                     }
                 }
                 else
                 {
                     foreach (var result in results)
                     {
-                        Console.WriteLine(result.ToString());
+                        output.Add(result.ToString());
                     }
                 }
             }
 
-            return RedirectToAction("Index");
+            ViewBag.Output = output;
+
+            return View("Index");
         }
     }
 }

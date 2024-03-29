@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "G:\\02 Code\\dotnet\\MyWebApplication\\MyWebApplication.csproj": {}
+    "C:\\Users\\CWP2020\\webrunnerforpowershell\\MyWebApplication.csproj": {}
   },
   "projects": {
-    "G:\\02 Code\\dotnet\\MyWebApplication\\MyWebApplication.csproj": {
+    "C:\\Users\\CWP2020\\webrunnerforpowershell\\MyWebApplication.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "G:\\02 Code\\dotnet\\MyWebApplication\\MyWebApplication.csproj",
+        "projectUniqueName": "C:\\Users\\CWP2020\\webrunnerforpowershell\\MyWebApplication.csproj",
         "projectName": "MyWebApplication",
-        "projectPath": "G:\\02 Code\\dotnet\\MyWebApplication\\MyWebApplication.csproj",
+        "projectPath": "C:\\Users\\CWP2020\\webrunnerforpowershell\\MyWebApplication.csproj",
         "packagesPath": "C:\\Users\\CWP2020\\.nuget\\packages\\",
-        "outputPath": "G:\\02 Code\\dotnet\\MyWebApplication\\obj\\",
+        "outputPath": "C:\\Users\\CWP2020\\webrunnerforpowershell\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\CWP2020\\AppData\\Roaming\\NuGet\\NuGet.Config"
