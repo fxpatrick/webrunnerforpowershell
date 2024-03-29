@@ -1,6 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Management.Automation;
+using System.Diagnostics;
+using System.IO;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace MyWebApplication.Controllers
 {
@@ -12,37 +15,46 @@ namespace MyWebApplication.Controllers
         }
 
         [HttpPost]
-        public IActionResult RunPowerShellScript()
+        public async Task<IActionResult> RunPowerShellScript()
         {
             string scriptPath = "C:\\Users\\CWP2020\\Documents\\test.ps1";
 
-            List<string> output = new List<string>();
+            var output = new List<string>();
 
-            using (PowerShell powerShell = PowerShell.Create())
+            var psi = new ProcessStartInfo
             {
-                powerShell.AddScript($"Set-ExecutionPolicy Bypass -Scope Process");
-                powerShell.AddScript(scriptPath);
-                var results = powerShell.Invoke();
+                FileName = "powershell.exe",
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                UseShellExecute = false,
+                CreateNoWindow = true,
+                Arguments = $"-NoProfile -ExecutionPolicy unrestricted -File \"{scriptPath}\""
+            };
 
-                if (powerShell.HadErrors)
-                {
-                    foreach (var error in powerShell.Streams.Error)
+            using (var process = new Process { StartInfo = psi })
+            {
+                process.OutputDataReceived += (sender, e) => {
+                    if (!string.IsNullOrEmpty(e.Data))
                     {
-                        output.Add("Error: " + error.ToString());
+                        output.Add(e.Data);
                     }
-                }
-                else
-                {
-                    foreach (var result in results)
+                };
+
+                process.ErrorDataReceived += (sender, e) => {
+                    if (!string.IsNullOrEmpty(e.Data))
                     {
-                        output.Add(result.ToString());
+                        output.Add($"Error: {e.Data}");
                     }
-                }
+                };
+
+                process.Start();
+                process.BeginOutputReadLine();
+                process.BeginErrorReadLine();
+
+                await process.WaitForExitAsync();
             }
 
-            ViewBag.Output = output;
-
-            return View("Index");
+            return Json(output);
         }
     }
 }

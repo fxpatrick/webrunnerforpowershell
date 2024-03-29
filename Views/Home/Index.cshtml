@@ -3,25 +3,33 @@
 <html>
 <head>
     <title>Run PowerShell Script</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-    <form method="post" action="/Home/RunPowerShellScript">
+    <form id="runScriptForm">
         <button type="submit">Run PowerShell Script</button>
     </form>
 
     <h2>PowerShell Output:</h2>
-    @if (ViewBag.Output != null && ViewBag.Output is List<string>)
-    {
-        <textarea rows="10" cols="50">
-            @foreach (var line in ViewBag.Output)
-            {
-                @line
-            }
-        </textarea>
-    }
-    else 
-    {
-        <p>No output available.</p>
-    }
+    <textarea id="outputTextArea" rows="10" cols="50" readonly></textarea>
+
+    <script>
+        $(function() {
+            $('#runScriptForm').submit(function(e) {
+                e.preventDefault();
+
+                $.post('/Home/RunPowerShellScript', function(data) {
+                    var outputTextArea = $('#outputTextArea');
+                    outputTextArea.val('');
+
+                    $.each(data, function(index, line) {
+                        outputTextArea.val(function(_, val) {
+                            return val + line + '\n';
+                        });
+                    });
+                });
+            });
+        });
+    </script>
 </body>
 </html>
